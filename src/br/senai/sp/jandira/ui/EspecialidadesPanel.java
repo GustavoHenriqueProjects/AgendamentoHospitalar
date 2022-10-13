@@ -5,6 +5,10 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,7 +38,7 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
         scroolEspecialidades = new javax.swing.JScrollPane();
         tableEspecialidades = new javax.swing.JTable();
         buttonExcluirEspecialidades = new javax.swing.JButton();
-        buttobEditarEspecialidade = new javax.swing.JButton();
+        buttonEditarEspecialidade = new javax.swing.JButton();
         buttonAdicionarEspecialidade = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de especialidades", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14), new java.awt.Color(158, 168, 250))); // NOI18N
@@ -67,43 +71,104 @@ public class EspecialidadesPanel extends javax.swing.JPanel {
         add(buttonExcluirEspecialidades);
         buttonExcluirEspecialidades.setBounds(600, 260, 40, 30);
 
-        buttobEditarEspecialidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/edit32.png"))); // NOI18N
-        buttobEditarEspecialidade.setToolTipText("Editar  especialidade selecionada");
-        buttobEditarEspecialidade.addActionListener(new java.awt.event.ActionListener() {
+        buttonEditarEspecialidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/edit32.png"))); // NOI18N
+        buttonEditarEspecialidade.setToolTipText("Editar  especialidade selecionada");
+        buttonEditarEspecialidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttobEditarEspecialidadeActionPerformed(evt);
+                buttonEditarEspecialidadeActionPerformed(evt);
             }
         });
-        add(buttobEditarEspecialidade);
-        buttobEditarEspecialidade.setBounds(650, 260, 40, 30);
+        add(buttonEditarEspecialidade);
+        buttonEditarEspecialidade.setBounds(650, 260, 40, 30);
 
         buttonAdicionarEspecialidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/Button-Adicionar.png"))); // NOI18N
         buttonAdicionarEspecialidade.setToolTipText("Editar nova Especialidade");
+        buttonAdicionarEspecialidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAdicionarEspecialidadeActionPerformed(evt);
+            }
+        });
         add(buttonAdicionarEspecialidade);
         buttonAdicionarEspecialidade.setBounds(700, 260, 40, 30);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonExcluirEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirEspecialidadesActionPerformed
-        // TODO add your handling code here:
+        
+        int linha = tableEspecialidades.getSelectedRow();
+        
+       if (linha != -1){
+           excluirEspecialidade(linha);
+       }else{
+           JOptionPane.showMessageDialog
+        (this,
+                "Por favor selecione a especialidade que você deseja excluir",
+                "Atenção",
+                JOptionPane.WARNING_MESSAGE);
+       }
     }//GEN-LAST:event_buttonExcluirEspecialidadesActionPerformed
+    private void excluirEspecialidade(int linha){
+        String codigoStr = tableEspecialidades.getValueAt(linha, 0).toString();
+        Integer codigo = Integer.valueOf(codigoStr);
+        
+        int resposta = JOptionPane.showConfirmDialog(
+                this,
+                "Você confirma a exclusão",
+                "Atenção", JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        EspecialidadeDAO.excluir(codigo);
+        
+        //Desenha tabela com um novo conjunto de dados
+        preencherTabela();
+    }
+    private void buttonEditarEspecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarEspecialidadeActionPerformed
+       
+    }//GEN-LAST:event_buttonEditarEspecialidadeActionPerformed
 
-    private void buttobEditarEspecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttobEditarEspecialidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttobEditarEspecialidadeActionPerformed
+    
+    private void buttonAdicionarEspecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarEspecialidadeActionPerformed
+        EspecialidadeDialog especialidadeDialog = new EspecialidadeDialog(null, true);
+        especialidadeDialog.setVisible(true);
+        preencherTabela();
+    }//GEN-LAST:event_buttonAdicionarEspecialidadeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttobEditarEspecialidade;
     private javax.swing.JButton buttonAdicionarEspecialidade;
+    private javax.swing.JButton buttonEditarEspecialidade;
     private javax.swing.JButton buttonExcluirEspecialidades;
     private javax.swing.JScrollPane scroolEspecialidades;
     private javax.swing.JTable tableEspecialidades;
     // End of variables declaration//GEN-END:variables
 private void preencherTabela() {
 
-        
-
         tableEspecialidades.setModel(EspecialidadeDAO.getEspecialidadesModel());
+        ajustarTabela();
     }
+
+    private void ajustarTabela(){
+        //Impedir que o usuario movimete as colunas
+        tableEspecialidades.getTableHeader().setReorderingAllowed(false);
+        
+        //Bloquear a edição das celulas da tabela
+        tableEspecialidades.setDefaultEditor(Object.class, null);
+        
+        tableEspecialidades.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tableEspecialidades.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tableEspecialidades.getColumnModel().getColumn(1).setPreferredWidth(220);
+        tableEspecialidades.getColumnModel().getColumn(2).setPreferredWidth(277);
+        
+    }
+    
+    
+    
+
+    public EspecialidadesPanel(JButton buttonAdicionarEspecialidade, JButton buttonEditarEspecialidade, JButton buttonExcluirEspecialidades, JScrollPane scroolEspecialidades, JTable tableEspecialidades) {
+        this.buttonAdicionarEspecialidade = buttonAdicionarEspecialidade;
+        this.buttonEditarEspecialidade = buttonEditarEspecialidade;
+        this.buttonExcluirEspecialidades = buttonExcluirEspecialidades;
+        this.scroolEspecialidades = scroolEspecialidades;
+        this.tableEspecialidades = tableEspecialidades;
+    }
+    
 
 }

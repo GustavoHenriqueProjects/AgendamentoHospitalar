@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 public class EspecialidadeDAO {
-
+     
     /*
     Essa classe será responsável pela persistência de dados
     das especialidades, por exemplo, adicionar uma nova especialidade,
@@ -77,7 +77,7 @@ public class EspecialidadeDAO {
         String[][] dados = new String[especialidades.size()][3];
         
         
-        // for IT eu crio uma especialidade para cada esecialidade dentro da ArrayList
+        // for IT eu crio uma especialidade para cada especialidade dentro da ArrayList
         int i = 0;
         for (Especialidade e : especialidades){
             dados[i][0] = e.getCodigo().toString();

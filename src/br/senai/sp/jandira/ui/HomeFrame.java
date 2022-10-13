@@ -51,6 +51,9 @@ public class HomeFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         buttonPlanoDeSaude = new javax.swing.JButton();
         buttonAgenda1 = new javax.swing.JButton();
         buttonHome = new javax.swing.JButton();
@@ -131,12 +134,12 @@ public class HomeFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("E-mail: HospitalSãoFransisco@gmail.com");
         PanelHome.add(jLabel2);
-        jLabel2.setBounds(430, 240, 260, 20);
+        jLabel2.setBounds(423, 220, 260, 20);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Site: www.HospitalSaoFrancisco@gmail.com");
         PanelHome.add(jLabel3);
-        jLabel3.setBounds(430, 270, 310, 20);
+        jLabel3.setBounds(423, 270, 310, 20);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Sistema para Agendamento de Consultas");
@@ -146,17 +149,29 @@ public class HomeFrame extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Telefone: 11 4143-6562");
         PanelHome.add(jLabel5);
-        jLabel5.setBounds(430, 210, 150, 20);
+        jLabel5.setBounds(423, 170, 150, 20);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel6.setText("Dados Técnicos:");
         PanelHome.add(jLabel6);
-        jLabel6.setBounds(430, 170, 200, 32);
+        jLabel6.setBounds(440, 130, 200, 32);
 
         jPanel2.setBackground(new java.awt.Color(158, 168, 250));
         PanelHome.add(jPanel2);
         jPanel2.setBounds(0, 100, 750, 5);
         jPanel2.getAccessibleContext().setAccessibleName("");
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/email.png"))); // NOI18N
+        PanelHome.add(jLabel7);
+        jLabel7.setBounds(380, 220, 30, 24);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/chamada-telefonica.png"))); // NOI18N
+        PanelHome.add(jLabel8);
+        jLabel8.setBounds(380, 170, 40, 20);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/rede.png"))); // NOI18N
+        PanelHome.add(jLabel9);
+        jLabel9.setBounds(380, 270, 30, 24);
 
         getContentPane().add(PanelHome);
         PanelHome.setBounds(30, 170, 750, 300);
@@ -186,7 +201,7 @@ public class HomeFrame extends javax.swing.JFrame {
         getContentPane().add(buttonHome);
         buttonHome.setBounds(20, 90, 70, 40);
 
-        setSize(new java.awt.Dimension(816, 505));
+        setSize(new java.awt.Dimension(816, 520));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -237,6 +252,9 @@ public class HomeFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labelIcon;
